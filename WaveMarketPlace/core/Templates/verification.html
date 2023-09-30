@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account Verification</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div>
+        <h3 class="text-4xl font-extrabold dark:text-white">Hello {{ user.username }}</h3> <br>
+    </div>
+   
+    <form method="post">
+       {% csrf_token %}
+        <div style="width: 20%;" class="mb-6">
+            <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Verification Code</label>
+            <input name="code" type="text" id="base-input" class="bg-gray-50 border border-gray-30 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+        </div>
+        <input  name='submit' class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
+    </form>
+</body>
+</html>

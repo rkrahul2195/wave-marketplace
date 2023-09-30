@@ -1,0 +1,25 @@
+{% load tailwind_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Edit Up </title>
+</head>
+<body>
+
+    <section>
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center"> Registration Page </h1> <br>
+    </section>
+
+    <div style="width: 65%; margin:auto" class="form-control">
+    <form method="POST">
+        {% csrf_token %}
+ 
+    {{ form|crispy }}
+    <input  class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full" type="submit">
+    </form>
+</div>
+</body>
+</html> 

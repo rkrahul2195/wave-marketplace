@@ -1,0 +1,20 @@
+{% extends "index.html" %}
+{% block title %}
+<title>Message</title>
+{% endblock title %}
+
+{% block content %}
+<section class="bg-white dark:bg-gray-900">
+    <form method="POST">
+        {% csrf_token %}
+        <div class="py-8 lg:py-16 px-4 mx-auto max-w-screen-md">
+            <label for="message" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your
+                message</label>
+            <textarea id="message" rows="4" name="message"
+                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            </textarea> <br>
+            <button type="submit" name="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Sent Message</button>
+        </div>
+    </form>
+</section>
+{% endblock content %}
