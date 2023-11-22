@@ -1,0 +1,56 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block page_first_part %}
+{% endblock page_first_part %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="page-content">
+
+        <section class="flex items-center justify-center min-h-screen py-10 group-data-[theme-color=violet]:bg-violet-500/10 group-data-[theme-color=sky]:bg-sky-500/10 group-data-[theme-color=red]:bg-red-500/10 group-data-[theme-color=green]:bg-green-500/10 group-data-[theme-color=pink]:bg-pink-500/10 group-data-[theme-color=blue]:bg-blue-500/10 dark:bg-neutral-700">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-12 lg:col-span-10 lg:col-start-2">
+                        <div class="flex flex-col bg-white rounded-lg dark:bg-neutral-800">
+                            <div class="grid flex-col grid-cols-12">
+                                <div class="col-span-6 ltr:rounded-l-lg rtl:rounded-r-lg">
+                                    <div class="p-10">
+                                        <a href="index.html">
+                                            <img src="#" alt="" class="hidden mx-auto dark:block">
+                                            <!-- <img src="assets/images/logo-dark.png" alt="" class="block mx-auto dark:hidden"> -->
+                                        </a>
+                                        <div class="mt-5">
+                                            <img src="assets/images/auth/sign-in.png" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-span-12 rounded-b-md lg:col-span-6 group-data-[theme-color=violet]:bg-violet-700 group-data-[theme-color=sky]:bg-sky-700 group-data-[theme-color=red]:bg-red-700 group-data-[theme-color=green]:bg-green-700 group-data-[theme-color=pink]:bg-pink-700 group-data-[theme-color=blue]:bg-blue-700 lg:rounded-b-none lg:ltr:rounded-r-lg rtl:rounded-l-lg">
+                                    <div class="flex flex-col items-center justify-center h-full p-12">
+                                        <div class="mb-6 text-center">
+                                            <h5 class="mb-2 text-lg text-white">Registration</h5>
+                                            <p class="text-white/80">Thank you for using Wave</p> 
+                                        </div>
+                                        <a href="{% url "freelancer_signup" %}" class="btn w-full bg-white text-gray-900 font-medium border-transparent hover:-translate-y-1.5 duration-500 ease">Freelancer</a>
+                                        <br>
+                                        <a href="{% url "client_signup" %}" class="btn w-full bg-white text-gray-900 font-medium border-transparent hover:-translate-y-1.5 duration-500 ease">Client</a>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+</div>
+
+
+
+
+
+  
+{% endblock content %}

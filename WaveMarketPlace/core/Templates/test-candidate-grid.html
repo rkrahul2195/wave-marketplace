@@ -1,0 +1,163 @@
+{% extends "home.html" %}
+{% load static %}
+
+
+{% block page_first_part %}
+
+{% endblock page_first_part %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="page-content">
+
+        <section class="pt-28 lg:pt-44 pb-28 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 dark:bg-neutral-900 bg-[url('../images/home/page-title.png')] bg-center bg-cover relative" >
+            <div class="container mx-auto">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <div class="text-center text-white">
+                            <h3 class="mb-4 text-[26px]">Freelancer Grid</h3>
+                            <div class="page-next">
+                                <nav class="inline-block" aria-label="breadcrumb text-center">
+                                    <ol class="flex flex-wrap justify-center text-sm font-medium uppercase">
+                                        <li><a href="#">Home</a></li>
+                                        {% comment %} <li><i class="bx bxs-chevron-right align-middle px-2.5"></i><a href="javascript:void(0)">Pages</a></li> {% endcomment %}
+                                        <li class="active" aria-current="page"><i class="bx bxs-chevron-right align-middle px-2.5"></i>Freelancer Grid</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="{% static "assets/images/about/shape.png" %}" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+            <img src="{% static "assets/images/about/shape-dark.png" %}" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+        </section>
+
+        <!-- Start grid -->
+            <section class="py-20">
+                <div class="container mx-auto">
+                    <div class="col-span-12">
+                        <div class="job-list-header">
+                        
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="grid items-center grid-cols-12">
+                            <div class="col-span-12 lg:col-span-8">
+                                <h6 class="mb-0 text-gray-900 fs-16 dark:text-gray-50"> Showing Active Freelancer </h6>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-10">
+                        <div class="grid grid-cols-12 gap-y-6 lg:gap-6">
+                            {% for user_details in data %}
+                            <div class="col-span-12 lg:col-span-4">
+                                 <div class="relative p-5 border rounded-md border-gray-100/50 dark:border-neutral-600">
+                                
+                                    <div class="flex mb-4">
+                                        <div class="relative shrink-0">
+                                            <img src="{% static "assets/images/user/img-01.jpg" %}" alt="" class="w-16 h-16 rounded">
+                                            <span class="absolute h-3.5 w-3.5 rounded-full bg-green-500 border-2 border-white -top-1 -right-1 dark:border-neutral-700">
+                                                <span class="hidden">active</span>
+                                            </span>
+                                        </div>
+                                        <div class="ltr:ml-3 rtl:mr-3">
+                                            <a href="#"><h5 class="mb-2 text-17 dark:text-white"> {{user_details.first_name }} {{ user_details.last_name }}  </h5></a>
+                                            <span class="text-13 bg-sky-500/20 text-sky-500 px-1.5 py-1 rounded">$800/month</span>
+                                        </div>
+                                    </div>
+
+                                    {% comment %} <ul class="flex items-center justify-between">
+                                        <li class="text-yellow-500 text-17">
+                                            <i class="mdi mdi-star"></i>
+                                            <i class="mdi mdi-star"></i>
+                                            <i class="mdi mdi-star"></i>
+                                            <i class="mdi mdi-star"></i>  
+                                            <i class="mdi mdi-star-half-full"></i>
+                                        </li>
+                                        <li>
+                                            <div class="h-8 w-8 bg-red-600 rounded text-white leading-[2.4] text-center">
+                                                <a href="javascript:void(0)"><i class="text-lg uil uil-heart-alt"></i></a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                     {% endcomment %}
+                                    <div class="mt-5 border rounded border-gray-100/50 dark:border-neutral-600">
+                                        <div class="grid grid-cols-12">
+                                            <div class="col-span-6">
+                                                <div class="px-3 py-2 ltr:border-r rtl:border-l dark:border-neutral-600 border-gray-100/50">
+                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">Exp. : 0-3 Years</p>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-span-6">
+                                                <div class="px-3 py-2">
+                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">Freelancers</p>
+                                                </div>
+                                            </div><!--end col-->
+                                        </div>
+                                    </div>
+
+                                    <div class="mt-4">
+                                        <p class="text-gray-500 dark:text-gray-300">Some quick example text to build on the card title and bulk the card's content Moltin gives you platform.</p>
+                                    </div>
+                                   
+                                    <div class="mt-6">
+                                        <a href="#hireNow" data-bs-toggle="modal" class="w-full text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 hover:-translate-y-2"><i class="mdi mdi-account-check"></i> Hire Now </a>
+                                        <a href="#candidate-details" class="w-full mt-2 border-transparent btn group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 hover:-translate-y-1 group-data-[theme-color=violet]:hover:bg-violet-500 group-data-[theme-color=violet]:hover:text-white group-data-[theme-color=sky]:hover:bg-sky-500 group-data-[theme-color=sky]:hover:text-white group-data-[theme-color=red]:hover:bg-red-500 group-data-[theme-color=red]:hover:text-white group-data-[theme-color=green]:hover:bg-green-500 group-data-[theme-color=green]:hover:text-white group-data-[theme-color=pink]:hover:bg-pink-500 group-data-[theme-color=pink]:hover:text-white group-data-[theme-color=blue]:hover:bg-blue-500 group-data-[theme-color=blue]:hover:text-white hover:ring group-data-[theme-color=violet]:hover:ring-violet-500/20 group-data-[theme-color=sky]:hover:ring-sky-500/20 group-data-[theme-color=red]:hover:ring-red-500/20 group-data-[theme-color=green]:hover:ring-green-500/20 group-data-[theme-color=pink]:hover:ring-pink-500/20 group-data-[theme-color=blue]:hover:ring-blue-500/20"><i class="mdi mdi-eye"></i> View Profile</a>
+                                    </div>
+
+                                    <div class="absolute px-2 text-white bg-violet-500 top-2 ltr:right-0 rtl:left-0">
+                                        <span class="relative text-xs font-medium uppercase">featured</span>
+                                        <div class="after:contant[] ltr:after:border-r-[11px] rtl:after:border-l-[11px] after:absolute after:border-b-[12px] ltr:after:-left-[11px] rtl:after:-right-[11.5px] after:top-0 after:border-t-[11.5px] after:border-t-transparent after:border-violet-500 after:border-b-transparent"></div>
+                                    </div>
+
+                                </div>
+                            </div> 
+                            {% endfor %}
+                           
+                        </div>
+                           
+                    </div>
+                 
+                  <!--Pagination Formate using-->
+                   
+                    <div class="grid grid-cols-12">
+                        <div class="col-span-12">
+                            <ul class="flex justify-center gap-2 mt-8">
+                                <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-gray-100/20">
+                                    <a class="cursor-auto" href="javascript:void(0)" tabindex="-1">
+                                        <i class="mdi mdi-chevron-double-left text-16 leading-[2.8] dark:text-white"></i>
+                                    </a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-white border border-transparent rounded-full cursor-pointer group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">1</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">2</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">3</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">4</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a href="javascript:void(0)" tabindex="-1">
+                                        <i class="mdi mdi-chevron-double-right text-16 leading-[2.8]"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end col-->
+                          
+                    </div>
+                </div>
+            </section>
+        <!-- End grid -->
+
+    </div>
+</div>
+
+{% endblock content %}

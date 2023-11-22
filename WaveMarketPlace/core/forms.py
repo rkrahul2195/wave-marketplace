@@ -5,12 +5,12 @@ from .models import Client, User,Freelencer,ProjectModel
 
 #Freelancer 
 class FreelancerSignUpForm(UserCreationForm):
-    full_name = forms.CharField(max_length=30)
+    first_name = forms.CharField(max_length=30)
+    last_name = forms.CharField(max_length=30)
     birth_day = forms.DateField(required=True)
     email = forms.EmailField(required=True)
     phone = forms.CharField(required=True)
     address = forms.CharField(max_length=100)
-    skill = forms.CharField(max_length=100)
     
     class Meta:
         model = User
@@ -20,14 +20,35 @@ class FreelancerSignUpForm(UserCreationForm):
     def save(self, commit=True):
         user = super().save(commit=False)
         user.email = self.cleaned_data['email']
-        user.is_freelencer = True
+        user.is_freelancer = True
         if commit:
             user.save()
-            freelancer = Freelencer.objects.create(user=user, full_name=self.cleaned_data['full_name'],
+            freelancer = Freelencer.objects.create(user=user, first_name=self.cleaned_data['first_name'],last_name=self.cleaned_data['last_name'],
                                        birth_day=self.cleaned_data['birth_day'],
                                        email=user.email,phone=self.cleaned_data['phone'],address=self.cleaned_data['address'],
-                                       skill=self.cleaned_data['skill'])
+                                       )
         return user
+
+
+
+# class FreelancerProfileForm(forms.Form):
+#     class Meta:
+#         model = FreelancerProfileModel
+#         fields = ['about','skill','interest','image']
+        
+       
+
+
+# class FreelancerProfileForm(ModelForm):
+#     class Meta:
+#         model = FreelancerProfileModel
+#         fields = ['about', 'skills', 'interest', 'image']
+
+#     def __init__(self, *args, **kwargs):
+#         super(FreelancerProfileForm, self).__init__(*args, **kwargs)
+
+#         # Add the `instance` keyword argument
+#         self.instance = kwargs.get('instance', None)
 
 
 class LoginForm(forms.Form):
@@ -42,8 +63,6 @@ class ClientSignupForm(UserCreationForm):
     birth_day = forms.DateField(required=True)
     email = forms.EmailField(required=True)
     phone = forms.CharField(required=True)
-    company = forms.CharField(required=True)
-    profession = forms.CharField(required=True)
     address = forms.CharField(max_length=100)
     
 
@@ -60,13 +79,15 @@ class ClientSignupForm(UserCreationForm):
             user.save()
             client = Client.objects.create(user=user, first_name=self.cleaned_data['first_name'],last_name=self.cleaned_data['last_name'],
                                        birth_day=self.cleaned_data['birth_day'],
-                                       email=user.email, phone=self.cleaned_data['phone'],address=self.cleaned_data['address'],
-                                       profession=self.cleaned_data['profession'],company=self.cleaned_data['company'])
+                                       email=user.email, phone=self.cleaned_data['phone'],
+                                       address=self.cleaned_data['address'],
+                                      )
         return user
 
 
 class ProjectForm(forms.Form):
     title = forms.CharField(max_length=100)
+    image = forms.ImageField(widget=forms.FileInput)
     catagories = forms.ChoiceField(choices=ProjectModel.P_CATAGORY)
     description = forms.CharField(widget=forms.Textarea)
     budget = forms.DecimalField(max_digits=10, decimal_places=2)

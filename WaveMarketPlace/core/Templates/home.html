@@ -1,0 +1,748 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr" data-mode="light" class="scroll-smooths group" data-theme-color="violet">
+    <head>
+       
+        <meta charset="utf-8" />
+        {% block title %}
+        <title> Home | Wave - Bangladeshi Freelancer Marketplace </title>
+        {% endblock title %}
+        <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no"
+        />
+        <meta
+          content="Tailwind Multipurpose Admin & Dashboard Template"
+          name="description"
+        />
+        <meta content="" name="Themesbrand" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static "assets/images/favicon.ico" %}" />
+
+
+        <link rel="stylesheet" href="{% static "assets/libs/choices.js/public/assets/styles/choices.min.css" %}">
+
+         <!-- Swiper Css -->
+        <link rel="stylesheet" href="{% static "assets/libs/swiper/swiper-bundle.min.css" %}">
+
+        <link rel="stylesheet" href="{% static "assets/css/icons.css" %}" />
+        <link rel="stylesheet" href="{% static "assets/css/tailwind.css" %}" />
+       
+    </head>
+
+ {% block slidebar %} 
+    <body class="bg-white dark:bg-neutral-800">
+        <nav class="navbar fixed right-0 left-0 top-0 px-5 lg:px-24 transition-all duration-500 ease shadow-lg shadow-gray-200/20 bg-white border-gray-200 dark:bg-neutral-800 z-40 dark:shadow-neutral-900" id="navbar">
+            <div class="mx-auto container-fluid">
+                <div class="flex flex-wrap items-center justify-between mx-auto">
+                    <a href="#" class="flex items-center">
+                        <img src="{% static "assets/images/logo.png" %}" alt="" class="logo-dark h-[22px] block dark:hidden">
+                        <!-- <img src="{% static "assets/images/logo-light.png" %}" alt="" class="logo-dark h-[22px] hidden dark:block"> -->
+                    </a>
+                    <button data-collapse-toggle="navbar-collapse" type="button" class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg navbar-toggler group lg:hidden hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-100 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-sticky" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+                    </button>
+
+                    
+                    <div class="flex items-center lg:order-2">
+                        <div> 
+                            <div class="relative dropdown ltr:mr-4 rtl:ml-4"> 
+                                {% if user.is_authenticated and user.is_client or user.is_freelancer %}
+                                <button type="button" class="flex items-center px-4 py-5 dropdown-toggle" id="page-header-user-dropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <img class="w-8 h-8 rounded-full ltr:xl:mr-2 rtl:xl:ml-2" src="{{ user_data.profile.url }}" alt="Header Avatar">
+                                    <span class="hidden fw-medium xl:block dark:text-gray-50"> {{ user_data.first_name }} {{ user_data.last_name}} </span> 
+                                </button> 
+                             
+
+                                {% else %}
+                                <button type="button" class="px-2 text-white border-transparent btn group-data-[theme-color=violet]:bg-violet-500 dropdown-toggle focus:ring ring-custom-500/20" data-bs-toggle="dropdown"> <i class="mdi mdi-account"></i> <i class="align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1"></i></button>
+                                {% endif %}
+                                <ul class="absolute top-auto z-50 hidden w-48 p-3 list-none bg-white border rounded shadow-lg dropdown-menu border-gray-500/20 xl:ltr:-left-3 ltr:-left-32 rtl:-right-3 dark:bg-neutral-800" id="profile/log" aria-labelledby="navNotifications">
+                                    {% if user.is_authenticated and user.is_client  %}
+                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
+                                        <a class="text-15 font-medium text-gray-800  group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="{% url "clientjobview" %}">Manage Jobs</a>
+                                    </li> 
+                                    {% endif %}
+                                    {% if user.is_authenticated and user.is_freelancer  %}
+                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
+                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="{% url "bookmarkview" %}">Bookmarks</a>
+                                    </li>
+                                     {% endif %} 
+
+                                    {% if user.is_authenticated %}
+                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
+                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="{% url "FreelancerProfile" %}">My Profile</a>
+                                    </li>
+                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
+                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="{% url "logout" %}">Logout</a>
+                                    </li> 
+                                    {% else %} 
+                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
+                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="{% url "login" %}">Login</a>
+                                    </li>
+                                    <li class="p-2 dropdown-item group/dropdown dark:text-gray-300">
+                                        <a class="text-15 font-medium text-gray-800 group-data-[theme-color=violet]:group-hover/dropdown:text-violet-500 group-data-[theme-color=sky]:group-hover/dropdown:text-sky-500 group-data-[theme-color=red]:group-hover/dropdown:text-red-500 group-data-[theme-color=green]:group-hover/dropdown:text-green-500 group-data-[theme-color=pink]:group-hover/dropdown:text-pink-500 group-data-[theme-color=blue]:group-hover/dropdown:text-blue-500 group-hover:pl-1.5 transition-all duration-300 ease-in dark:text-gray-50" href="{% url "user_type" %}">Registration</a>
+                                    </li> 
+                                    {% endif %}
+                                </ul>
+                            </div> 
+                        </div>
+                    </div>
+                   
+
+                    <div id="navbar-collapse" class="navbar-res items-center justify-between w-full text-sm lg:flex lg:w-auto lg:order-1 group-focus:[.navbar-toggler]:block hidden">
+                        <ul class="flex flex-col items-start mt-5 mb-10 font-medium lg:mt-0 lg:mb-0 lg:items-center lg:flex-row" id="navigation-menu">
+                            <li class="relative dropdown">
+                                {% if user.is_authenticated and user.is_client  %}
+                                <a href="{% url "clientdashboard" %}" class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]" id="home"> Dashboard </a>
+                                {% else %}
+                                <a href="{% url "home" %}" class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]" id="home"> Home </a> 
+                                {% endif %}
+                            </li>
+                            <li class="py-5 lg:px-4"> 
+                                {% if user.is_authenticated and user.is_freelancer  %}
+                                <a href="{% url "dashboard" %}" class="py-2.5 text-gray-800 font-medium leading-tight dark:text-gray-50" id="contact" data-bs-toggle="dropdown"> Dashboard </a>
+                                {% elif user.is_authenticated and user.is_client  %}
+                                <a href="{% url "job_post" %}" class="py-2.5 text-gray-800 font-medium leading-tight dark:text-gray-50" id="contact" data-bs-toggle="dropdown"> Post Job </a>
+                                {% endif %}
+                            </li>
+                            <li class="py-5 lg:px-4">
+                                <a href="{% url "project_list" %}" class="py-2.5 text-gray-800 font-medium leading-tight dark:text-gray-50" id="contact" data-bs-toggle="dropdown">Job </a>
+                            </li>
+                            <li class="relative dropdown lg:mt-0">
+                                <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]" id="company" data-bs-toggle="dropdown">Company <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
+
+                                <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800" aria-labelledby="company">
+                                    <li><a
+                                        class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
+                                        href="{% static "about.html" %}"> About Us </a> 
+                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="{% static "privacy-policy.html" %}">Privacy & Policy</a>
+                                    </li>
+                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="{% static "faqs.html" %}">Faqs</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            {% if user.is_authenticated %} 
+                        <li class="relative dropdown lg:mt-0">
+                            <button class="py-5 text-gray-800 lg:px-4 dropdown-toggle dark:text-gray-50 lg:h-[70px]" id="company" data-bs-toggle="dropdown">Features <i class='align-middle bx bxs-chevron-down ltr:ml-1 rtl:mr-1'></i></button>
+
+                                <ul class="relative top-auto z-50 py-2 list-none bg-white border-0 rounded dropdown-menu lg:border border-gray-500/20 lg:absolute ltr:-left-3 rtl:-right-3 lg:w-48 lg:shadow-lg dark:bg-neutral-800" aria-labelledby="company">
+                                   {% if user.is_authenticated and user.is_client %}
+                                    <li><a
+                                        class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50"
+                                        href="{% url "cadidate-grid" %}"> Hire </a> 
+                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="#Message">Message</a>
+                                    </li> 
+                                    {% elif user.is_freelancer %}
+                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="#Message">Message</a>
+                                    </li>
+                                    <li><a class="block w-full px-4 py-2 text-13 font-medium text-gray-700 duration-300 bg-transparent dropdown-item whitespace-nowrap hover:translate-x-1.5 group-data-[theme-color=violet]:hover:text-violet-500 group-data-[theme-color=sky]:hover:text-sky-500 group-data-[theme-color=red]:hover:text-red-500 group-data-[theme-color=green]:hover:text-green-500 group-data-[theme-color=pink]:hover:text-pink-500 group-data-[theme-color=blue]:hover:text-blue-500 uppercase group-data-[mode=dark]:text-gray-50" href="#ClientList">Client</a>
+                                    </li>
+                                    {% endif %}
+                                </ul>
+                        </li>
+                            {% else %}
+                            <li class="py-5 lg:px-4">
+                                <a href="{% static "contact.html" %}" class="py-2.5 text-gray-800 font-medium leading-tight dark:text-gray-50" id="contact" data-bs-toggle="dropdown">Contact </a>
+                            </li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+    {% endblock slidebar %} 
+  
+    {% block page_first_part %}
+        <div class="main-content">
+            <div class="page-content">
+                <!-- start home -->
+               
+                <section class="relative bg-opacity-10 py-28 dark:bg-violet-900 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20">
+                    <div class="container mx-auto">
+                        <div class="grid items-center grid-cols-12 rtl:gap-10">
+                            <div class="col-span-12 lg:col-span-7">
+                                <div class="mb-3 ltr:mr-14 rtl:ml-14">
+                                    <h6 class="mb-3 text-sm text-gray-900 uppercase dark:text-gray-50">We have 150,000+ live jobs</h6>
+                                    <h1 class="mb-3 text-5xl font-semibold leading-tight text-gray-900 dark:text-gray-50">Find your dream jobs <br> with <span class="font-bold group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">Wave</span></h1>
+                                    <p class="text-lg font-light text-gray-500 whitespace-pre-line dark:text-gray-300">Find jobs, create trackable resumes and enrich your
+                                            applications.Carefully crafted after analyzing the needs of different 
+                                            industries.</p>
+                                </div>
+                                <form method="get" action="{% url 'search_title' %}">
+                                    <div class="registration-form">
+                                        <div class="grid grid-cols-12">
+                                            <div class="col-span-12 xl:col-span-4">
+                                                <div class="mt-3 rounded-l filter-search-form filter-border mt-md-0">
+                                                    <i class="uil uil-briefcase-alt"></i>
+                                                    <input name="title" type="text" id="job-title" class="w-full filter-input-box placeholder:text-gray-100 placeholder:text-13 dark:text-gray-100" placeholder="Title Name ">
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-span-12 xl:col-span-4">
+                                                <div class="h-full mt-3">
+                                                    <button value="search" class="btn group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 border rounded-lg border-transparent ltr:xl:rounded-l-none rtl:xl:rounded-r-none w-full py-[18px] text-white" type="submit"><i class="uil uil-search me-1"></i> Find Job</button>
+                                                </div>
+                                            </div><!--end col-->
+                                        </div><!--end row-->
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-span-5">
+                                <div class="mt-5">
+                                    <img src="{% static "assets/images/process-02.png" %}" alt="" class="mb-5 home-img max-w-none"> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <img src="{% static "assets/images/bg-shape.png" %}" alt="" class="absolute block -bottom-5 dark:hidden">
+                    <img src="{% static "assets/images/bg-shape-dark.png" %}" alt="" class="absolute hidden -bottom-5 dark:block">
+                </section>
+
+    {% endblock page_first_part %}
+                    
+                <!-- end home -->
+
+    {% block content %}
+                <!-- default content text (typically empty) -->
+                
+                <!-- start job list -->
+                    <section class="py-20 bg-gray-50 dark:bg-neutral-700">
+                        <div class="container mx-auto">
+                            <div class="grid grid-cols-1 gap-5">
+                                <div class="mb-5 text-center">
+                                    <h3 class="mb-3 text-3xl text-gray-900 dark:text-gray-50">New & Random Jobs</h3>
+                                    <p class="mb-5 text-gray-500 whitespace-pre-line dark:text-gray-300">Post a job to tell us about your project. We'll quickly match you with the right <br> freelancers.</p>
+                                </div>
+                            </div>
+                            <div class="nav-tabs chart-tabpill">
+                                <div class="grid grid-cols-12">
+                                    <div class="col-span-12 lg:col-span-8 lg:col-start-3">
+                                        
+                                        <div class="p-1.5 bg-white dark:bg-neutral-900 shadow-lg shadow-gray-100/30 rounded-lg dark:shadow-neutral-700">
+                                             <ul class="items-center text-sm font-medium text-center text-gray-700 nav md:flex">
+                                                <li class="w-full">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="recent-job" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50 active" aria-current="page">Recent Jobs</a>
+                                                </li>
+                                                <li class="w-full">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="featured-jobs-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Featured Jobs</a>
+                                                </li>
+                                                {% comment %} <li class="w-full">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="freelancer-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Freelancer</a>
+                                                </li>
+                                                 <li class="w-full">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="part-time-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Part Time</a>
+                                                </li>
+                                                 <li class="w-full">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="full-time-tab" class="inline-block w-full py-[12px] px-[18px] dark:text-gray-50">Full Time</a>
+                                                </li> {% endcomment %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-content">
+                                    <div class="block w-full tab-pane" id="recent-job">
+                                        <div class="pt-8 ">
+                                            <div class="space-y-8">
+                                                {% for job in data  %}
+                                                <div class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600">
+                                                    <div class="w-48 absolute -top-[5px] -left-20 -rotate-45 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 p-[6px] text-center">
+                                                        <a href="javascript:void(0)" class="text-2xl text-white align-middle"><i class="mdi mdi-star"></i></a>
+                                                    </div>
+                                                    <div class="p-4">
+                                                        <div class="grid items-center grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="mb-4 text-center mb-md-0 ">
+                                                                    <a href="{% static "company-details.html" %}"><img src=" {{job.image.url}} " alt="" class="mx-auto w-16 h-16 img-fluid rounded-6"></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 mb-md-0">
+                                                                    <h5 class="mb-1 fs-18"><a href="{% url "jobdetails" job.id %}" class="text-gray-900 dark:text-gray-50"> {{job.title}} </a>
+                                                                    </h5>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">{{ job.client_id.first_name }} {{ job.client_id.last_name }}</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 lg:flex">
+                                                                    <div class="flex-shrink-0">
+                                                                        <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-briefcase-account-outline"></i>
+                                                                    </div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"> {{job.catagories}} </p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div>
+                                                                    <p class="mb-2 text-gray-500 dark:text-gray-300"><span class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">$</span> {{job.budget}} </p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="flex flex-wrap gap-1.5">
+                                                                    <span class="badge bg-violet-500/20 text-violet-500 text-13 px-2 py-0.5 font-medium rounded">Freelancer</span>
+                                                                    <span class="badge bg-sky-500/20 text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Private</span>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                    <div class="p-3 bg-gray-50 dark:bg-neutral-700">
+                                                        <div class="grid grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-6">
+                                                                <div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"><span class="text-gray-900 dark:text-gray-50">Deadline:</span> {{job.deadline}} </p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            
+                                                            <div class="col-span-12 lg:col-span-5">
+                                                                <div class="text-start lg:text-end dark:text-gray-50">
+                                                                    <a href="{% url "job-list" job.id %}" data-bs-toggle="modal">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                    <div class="absolute top-4 ltr:right-4 rtl:left-4">
+                                                        <div class="w-8 h-8 text-center text-gray-100 transition-all duration-300 bg-transparent border rounded border-gray-100/50 hover:bg-red-600 hover:text-white hover:border-transparent dark:border-zinc-700">
+                                                            <a href="{% url "bookmark" job.id %}"><i class="uil uil-heart-alt text-lg leading-[1.8]"></i></a>
+                                                        </div>
+                                                    </div> 
+                                                </div>
+                    
+                                                {% endfor %}
+                    
+                                            </div>
+                                        
+                                        </div>
+                                    </div>
+
+                                    <div class="hidden w-full tab-pane" id="featured-jobs-tab">
+                                        <div class="pt-8 ">
+                                            <div class="space-y-8">
+                                                <div class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600 dark:hover:bg-violet-500">
+                                                    <div class="w-48 absolute -top-[5px] -left-20 -rotate-45 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 p-[6px] text-center">
+                                                        <a href="javascript:void(0)" class="text-2xl text-white align-middle"><i class="mdi mdi-star"></i></a>
+                                                    </div>
+                                                    <div class="p-4">
+                                                        <div class="grid items-center grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="mb-4 text-center mb-md-0">
+                                                                    <a href="{% static "company-details.html" %}"><img src="{% static "assets/images/featured-job/img-01.png" %}" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 mb-md-0">
+                                                                    <h5 class="mb-1 fs-18"><a href="{% static "job-details.html" %}" class="text-gray-900 dark:text-gray-50">Web Developer</a>
+                                                                    </h5>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Web Technology pvt.Ltd</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 lg:flex">
+                                                                    <div class="flex-shrink-0">
+                                                                        <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
+                                                                    </div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">Oakridge Lane Richardson</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div>
+                                                                    <p class="mb-2 text-gray-500 dark:text-gray-300"><span class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">$</span>1000-1200/m</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="flex flex-wrap gap-2">
+                                                                    <span class="badge bg-green-500/20 text-green-500 text-13 px-2 py-0.5 font-medium rounded">Full Time</span>
+                                                                    <span class="badge bg-sky-500/20 text-sky-500 text-13 px-2 py-0.5 font-medium rounded">Private</span>
+                                                                    <span class="badge bg-yellow-500/20 text-yellow-500 text-13 px-2 py-0.5 font-medium rounded">Urgent</span>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                    <div class="p-3 bg-gray-50 dark:bg-neutral-700">
+                                                        <div class="grid grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-4">
+                                                                <div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"><span class="text-gray-900 dark:text-gray-50">Experience :</span> 0
+                                                                        - 1 years</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-6">
+                                                                <div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"><span class="text-gray-900 dark:text-gray-50">Notes :</span>
+                                                                        languages only differ in their grammar. </p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-3 lg:col-span-2">
+                                                                <div class="text-start text-md-end dark:text-gray-50">
+                                                                    <a href="#applyNow" data-bs-toggle="modal">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600 dark:hover:bg-violet-500">
+                                                        <div class="w-48 absolute -top-[5px] -left-20 -rotate-45 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:group-hover/jobs:bg-violet-500 group-data-[theme-color=sky]:group-hover/jobs:bg-sky-500 group-data-[theme-color=red]:group-hover/jobs:bg-red-500 group-data-[theme-color=green]:group-hover/jobs:bg-green-500 group-data-[theme-color=pink]:group-hover/jobs:bg-pink-500 group-data-[theme-color=blue]:group-hover/jobs:bg-blue-500 transition-all duration-500 ease-in-out p-[6px] text-center dark:bg-violet-500/20">
+                                                            <a href="javascript:void(0)" class="text-2xl text-white align-middle"><i class="mdi mdi-star"></i></a>
+                                                        </div>
+                                                        <div class="p-4">
+                                                            <div class="grid items-center grid-cols-12">
+                                                                <div class="col-span-12 lg:col-span-2">
+                                                                    <div class="mb-4 text-center mb-md-0">
+                                                                        <a href="{% static "company-details.html" %}"><img src="{% static "assets/images/featured-job/img-02.png" %}" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-span-12 lg:col-span-3">
+                                                                    <div class="mb-2 mb-md-0">
+                                                                        <h5 class="mb-1 fs-18"><a href="{% static "job-details.html" %}" class="text-gray-900 dark:text-gray-50">Business Associate</a>
+                                                                        </h5>
+                                                                        <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Pixel Technology pvt.Ltd</p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-span-12 lg:col-span-3">
+                                                                    <div class="mb-2 lg:flex">
+                                                                        <div class="flex-shrink-0">
+                                                                            <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
+                                                                        </div>
+                                                                        <p class="mb-0 text-gray-500 dark:text-gray-300">Dodge City, Louisiana</p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-span-12 lg:col-span-2">
+                                                                    <div>
+                                                                        <p class="mb-2 text-gray-500 dark:text-gray-300"><span class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">$</span>800-1800/m</p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-span-12 lg:col-span-2">
+                                                                    <div class="flex flex-wrap gap-1.5">
+                                                                        <span class="badge bg-red-500/20 text-red-500 text-13 px-2 py-0.5 font-medium rounded">Part Time</span>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+                                                            <!--end row-->
+                                                        </div>
+                                                        <div class="p-3 bg-gray-50 dark:bg-neutral-700">
+                                                            <div class="grid grid-cols-12">
+                                                                <div class="col-span-12 lg:col-span-4">
+                                                                    <div>
+                                                                        <p class="mb-0 text-gray-500 dark:text-gray-300"><span class="text-gray-900 dark:text-gray-50">Experience :</span> 1
+                                                                            - 2 years</p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-span-12 lg:col-span-6">
+                                                                    <div>
+                                                                        <p class="mb-0 text-gray-500 dark:text-gray-300"><span class="text-gray-900 dark:text-gray-50">Notes :</span>
+                                                                            languages only differ in their grammar. </p>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                                <div class="col-span-3 lg:col-span-2">
+                                                                    <div class="text-start text-md-end dark:text-gray-50">
+                                                                        <a href="#applyNow" data-bs-toggle="modal">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                                <!--end col-->
+                                                            </div>
+                                                            <!--end row-->
+                                                        </div>
+                                                </div>
+
+                                                <div class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600 dark:hover:bg-violet-500">
+                                                    <div class="w-48 absolute -top-[5px] -left-20 -rotate-45 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 p-[6px] text-center">
+                                                        <a href="javascript:void(0)" class="text-2xl text-white align-middle"><i class="mdi mdi-star"></i></a>
+                                                    </div>
+                                                    <div class="p-4">
+                                                        <div class="grid items-center grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="mb-4 text-center mb-md-0">
+                                                                    <a href="{% static "company-details.html" %}"><img src="{% static "assets/images/featured-job/img-03.png" %}" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 mb-md-0">
+                                                                    <h5 class="mb-1 fs-18"><a href="{% static "job-details.html" %}" class="text-gray-900 dark:text-gray-50">Digital Marketing Manager</a>
+                                                                    </h5>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Jobcy Technology Pvt.Ltd</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 lg:flex">
+                                                                    <div class="flex-shrink-0">
+                                                                        <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
+                                                                    </div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">Phoenix, Arizona</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div>
+                                                                    <p class="mb-2 text-gray-500 dark:text-gray-300"><span class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">$</span>1500-2400/m</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="flex flex-wrap gap-1.5">
+                                                                    <span class="badge bg-violet-500/20 text-violet-500 text-13 px-2 py-0.5 font-medium rounded">Freelancer</span>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                    <div class="p-3 bg-gray-50 dark:bg-neutral-700">
+                                                        <div class="grid grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-6">
+                                                                <div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"><span class="text-gray-900 dark:text-gray-50">Experience :</span> 4+ years</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            
+                                                            <div class="col-span-12 lg:col-span-5">
+                                                                <div class="text-start lg:text-end dark:text-gray-50">
+                                                                    <a href="#applyNow" data-bs-toggle="modal">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                </div>
+
+                                                <div class="relative mt-4 overflow-hidden transition-all duration-500 ease-in-out bg-white border rounded-md border-gray-100/50 group/jobs group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:-translate-y-2 dark:bg-neutral-900 dark:border-neutral-600 dark:hover:bg-violet-500">
+                                                    <div class="w-48 absolute -top-[5px] -left-20 -rotate-45 group-data-[theme-color=violet]:bg-violet-500/20 group-data-[theme-color=sky]:bg-sky-500/20 group-data-[theme-color=red]:bg-red-500/20 group-data-[theme-color=green]:bg-green-500/20 group-data-[theme-color=pink]:bg-pink-500/20 group-data-[theme-color=blue]:bg-blue-500/20 group-data-[theme-color=violet]:group-hover/jobs:bg-violet-500 group-data-[theme-color=sky]:group-hover/jobs:bg-sky-500 group-data-[theme-color=red]:group-hover/jobs:bg-red-500 group-data-[theme-color=green]:group-hover/jobs:bg-green-500 group-data-[theme-color=pink]:group-hover/jobs:bg-pink-500 group-data-[theme-color=blue]:group-hover/jobs:bg-blue-500 transition-all duration-500 ease-in-out p-[6px] text-center dark:bg-violet-500/20">
+                                                        <a href="javascript:void(0)" class="text-2xl text-white align-middle"><i class="mdi mdi-star"></i></a>
+                                                    </div>
+                                                    <div class="p-4">
+                                                        <div class="grid items-center grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="mb-4 text-center mb-md-0">
+                                                                    <a href="{% static "company-details.html" %}"><img src="{% static "assets/images/featured-job/img-04.png" %}" alt="" class="mx-auto img-fluid rounded-3"></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 mb-md-0">
+                                                                    <h5 class="mb-1 fs-18"><a href="{% static "job-details.html" %}" class="text-gray-900 dark:text-gray-50">Product Director</a>
+                                                                    </h5>
+                                                                    <p class="mb-0 text-gray-500 fs-14 dark:text-gray-300">Creative Agency</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-3">
+                                                                <div class="mb-2 lg:flex">
+                                                                    <div class="flex-shrink-0">
+                                                                        <i class="mr-1 group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500 mdi mdi-map-marker"></i>
+                                                                    </div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300">Escondido, California</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div>
+                                                                    <p class="mb-2 text-gray-500 dark:text-gray-300"><span class="group-data-[theme-color=violet]:text-violet-500 group-data-[theme-color=sky]:text-sky-500 group-data-[theme-color=red]:text-red-500 group-data-[theme-color=green]:text-green-500 group-data-[theme-color=pink]:text-pink-500 group-data-[theme-color=blue]:text-blue-500">$</span>1000-1200/m</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            <div class="col-span-12 lg:col-span-2">
+                                                                <div class="flex flex-wrap gap-1.5">
+                                                                    <span class="badge bg-green-500/20 text-green-500 text-13 px-2 py-0.5 font-medium rounded">Full Time</span>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                    <div class="p-3 bg-gray-50 dark:bg-neutral-700">
+                                                        <div class="grid grid-cols-12">
+                                                            <div class="col-span-12 lg:col-span-6">
+                                                                <div>
+                                                                    <p class="mb-0 text-gray-500 dark:text-gray-300"><span class="text-gray-900 dark:text-gray-300">Experience :</span> 4+ years</p>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                            
+                                                            <div class="col-span-12 lg:col-span-5">
+                                                                <div class="text-start lg:text-end dark:text-gray-50">
+                                                                    <a href="#applyNow" data-bs-toggle="modal">Apply Now <i class="mdi mdi-chevron-double-right"></i></a>
+                                                                </div>
+                                                            </div>
+                                                            <!--end col-->
+                                                        </div>
+                                                        <!--end row-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+
+                            <div class="mt-8">
+                                <div class="grid grid-cols-1">
+                                    <div class="text-center">
+                                        <a href="{% static "job-categories.html" %}" class="text-white border-transparent group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 btn focus:ring focus:ring-custom-500/20">View More  <i class="uil uil-arrow-right ms-1"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                <!-- end job list -->
+
+                <!-- start process -->
+                    <section class="py-20 dark:bg-neutral-800">
+                        <div class="container mx-auto">
+                            <div class="nav-tabs round-pill">
+                                <div class="grid items-center grid-cols-12 gap-5">
+                                    <div class="col-span-12 lg:col-span-6">
+                                        <h3 class="mb-3 text-3xl text-gray-900 dark:text-gray-50">How It Work</h3>
+                                        <p class="text-gray-500 dark:text-gray-300">Post a job to tell us about your project. We'll quickly match you with the
+                                            right freelancers.</p>
+
+                                        <div class="mt-5">
+                                            <ul class="text-gray-700 nav">
+                                                <li class="w-full mb-[22px]">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="v-pills-home-tab" class="relative inline-block w-full p-2 active group/active" aria-current="page">
+                                                    <div class="after:content-[''] after:h-[65px] after:border after:border-dashed after:border-gray-100 after:absolute ltr:after:left-7 rtl:after:right-7 after:-bottom-5 after:group-[.active]:bg-violet-300 hidden md:block"></div>
+                                                        <div class="flex">
+                                                            <div class="shrink-0 h-10 w-10 rounded-full text-center bg-gray-500/20 group-[.active]:group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:group-[.active]:bg-sky-500 group-data-[theme-color=red]:group-[.active]:bg-red-500 group-data-[theme-color=green]:group-[.active]:bg-green-500 group-data-[theme-color=pink]:group-[.active]:bg-pink-500 group-data-[theme-color=blue]:group-[.active]:bg-blue-500">
+                                                                <span class="text-gray-900 group-[.active]:text-white text-16 leading-[2.5] dark:text-gray-50">1</span>
+                                                            </div>
+                                                            <div class="grow ltr:ml-4 rtl:mr-4">
+                                                                <h5 class="fs-18 text-gray-900 group-data-[theme-color=violet]:group-[.active]:text-violet-500 group-data-[theme-color=sky]:group-[.active]:text-sky-500 dark:text-gray-50">Register an account</h5>
+                                                                <p class="mt-1 mb-2 text-gray-500 dark:text-gray-300">Due to its widespread use as filler text for layouts, non-readability
+                                                                is of great importance.</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="w-full mb-[22px]">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="v-pills-profile" class="relative inline-block w-full p-2 group" aria-current="page">
+                                                    <div class="after:content-[''] after:h-[65px] after:border after:border-dashed after:border-gray-100 after:absolute ltr:after:left-7 rtl:after:right-7 after:-bottom-5 after:group-[.active]:bg-violet-300 hidden md:block"></div>
+                                                        <div class="flex">
+                                                            <div class="shrink-0 h-10 w-10 rounded-full text-center bg-gray-500/20 group-[.active]:bg-violet-500">
+                                                                <span class="text-gray-900 group-[.active]:text-white text-16 leading-[2.5] dark:text-gray-50">2</span>
+                                                            </div>
+                                                            <div class="grow ltr:ml-4 rtl:mr-4">
+                                                                <h5 class="fs-18 text-gray-900 group-[.active]:text-violet-500 dark:text-gray-50">Find your job</h5>
+                                                                <p class="mt-1 mb-2 text-gray-500">There are many variations of passages of avaibookmark-label, but the majority
+                                                                alteration in some form.</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li class="w-full mb-[22px]">
+                                                    <a href="javascript:void(0);" data-tw-toggle="tab" data-tw-target="v-pills-messages" class="relative inline-block w-full p-2 group" aria-current="page">
+                                                        <div class="flex">
+                                                            <div class="shrink-0 h-10 w-10 rounded-full text-center bg-gray-500/20 group-[.active]:bg-violet-500">
+                                                                <span class="text-gray-900 group-[.active]:text-white text-16 leading-[2.5] dark:text-gray-50">3</span>
+                                                            </div>
+                                                            <div class="grow ltr:ml-4 rtl:mr-4">
+                                                                <h5 class="fs-18 text-gray-900 group-[.active]:text-violet-500 dark:text-gray-50">Apply for job</h5>
+                                                                <p class="mt-1 mb-2 text-gray-500">It is a long established fact that a reader will be distracted by the
+                                                                readable content of a page.</p>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-span-12 lg:col-span-6">
+                                        <div class="tab-content">
+                                            <div class="block tab-pane" id="v-pills-home-tab">
+                                                <img src="{% static "assets/images/process-01.png" %}" alt="" class="max-w-full">
+                                            </div>
+                                            <div class="hidden tab-pane" id="v-pills-profile">
+                                                <img src="{% static "assets/images/process-02.png" %}" alt="" class="max-w-full">
+                                            </div>
+                                            <div class="hidden tab-pane" id="v-pills-messages">
+                                                <img src="{% static "assets/images/process-03.png" %}" alt="" class="max-w-full">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                <!-- end process -->
+        {% endblock %}
+
+    {% block footer %}
+                <!-- start cta -->
+        <footer class="footer ">
+            <!-- strat footer alt -->
+            <section class="py-6 border-t bg-zinc-800 border-gray-100/10 dark:bg-neutral-900">
+                <div class="container mx-auto">
+                    <div class="text-center">
+                        <p class="mb-0 text-center text-white/50">
+                            <script>document.write(new Date().getFullYear())</script>
+                            © Wave - Develop by
+                            <a href="#" target="_blank" class="underline transition-all duration-300 hover:text-gray-50">Rk Rahul</a>
+                        </p>
+                    </div>
+                </div>
+            </section>
+            <!-- end footer alt -->
+        </footer>
+        <!-- end Footer -->
+
+   
+    
+
+     <script src="https://unicons.iconscout.com/release/v4.0.0/script/monochrome/bundle.js"></script>
+     <script src="{% static "assets/libs/@popperjs/core/umd/popper.min.js" %}"></script>
+     <script src="{% static "assets/libs/simplebar/simplebar.min.js" %}"></script>
+
+
+    <script src="{% static "assets/js/pages/switcher.js" %}"></script>
+    
+        <script src="{% static "assets/libs/choices.js/public/assets/scripts/choices.min.js" %}"></script>
+
+        <script src="{% static "assets/js/pages/job-list.init.js" %}"></script>
+    
+        <script src="{% static "assets/js/pages/dropdown&modal.init.js" %}"></script>
+
+        <!-- Swiper Js -->
+            <script src="{% static "assets/libs/swiper/swiper-bundle.min.js" %}"></script>
+            <script src="{% static "assets/js/pages/swiper.init.js" %}"></script>
+
+        <script src="{% static "assets/js/pages/nav&tabs.js" %}"></script>
+
+        <script src="{% static "assets/js/app.js" %}"></script>
+
+    {% endblock footer %}
+    
+</body>
+</html>

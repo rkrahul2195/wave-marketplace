@@ -1,0 +1,137 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block page_first_part %}
+
+{% endblock page_first_part %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="page-content">
+
+        <section class="pt-28 lg:pt-44 pb-28 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 dark:bg-neutral-900 bg-[url('../images/home/page-title.png')] bg-center bg-cover relative" >
+            <div class="container mx-auto">
+                <div class="grid">
+                    <div class="col-span-12">
+                        <div class="text-center text-white">
+                            <h3 class="mb-4 text-[26px]">Candidate List</h3>
+                            <div class="page-next">
+                                <nav class="inline-block" aria-label="breadcrumb text-center">
+                                    <ol class="flex flex-wrap justify-center text-sm font-medium uppercase">
+                                        <li><a href="#">Home</a></li>
+                                        <li><i class="bx bxs-chevron-right align-middle px-2.5"></i><a href="javascript:void(0)">Pages</a></li>
+                                        <li class="active" aria-current="page"><i class="bx bxs-chevron-right align-middle px-2.5"></i>Candidate List</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <img src="{% static "assets/images/about/shape.png" %}" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+            <img src="{% static "assets/images/about/shape-dark.png" %}" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+        </section>
+       
+         
+
+        <!-- Start grid -->
+            <section class="py-20">
+                <div class="container mx-auto">
+                    <div class="col-span-12">
+                        <div class="job-list-header">
+                           
+                        </div>
+                    </div>
+                    <div class="mt-5">
+                        <div class="grid items-center grid-cols-12">
+                            <div class="col-span-12 lg:col-span-8">
+                                <h6 class="mb-0 text-gray-900 fs-16 dark:text-gray-50"> Showing Application Your's Job </h6>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 space-y-6">
+                        {% for candidate in data  %}
+                        
+                        <div class="p-4 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
+                            <div class="grid items-center grid-cols-12">
+                                <div class="col-span-12 md:col-auto">
+                                    <div>
+                                        <a href="javascript:void(0)"><img src="{{ candidate.profile.url }} " alt="" class="w-16 h-16 p-1 rounded-full outline outline-2 outline-gray-100/50 dark:outline-neutral-600"></a>
+                                    </div>
+                                </div><!--end col-->
+                                
+                                <div class="col-span-12 md:col-span-5">
+                                    <div class="mt-3 mt-lg-0">
+                                        <h5 class="mb-0 text-gray-900 text-19 dark:text-white"><a href="#"> {{ candidate.user_details.first_name }} {{ candidate.user_details.last_name }} </a> </h5>
+                                        <p class="mb-2 text-gray-500 text-muted dark:text-gray-300"><i class="mdi mdi-email"></i> {{ candidate.user_details.email }} </p>
+                                        <ul class="flex flex-wrap gap-3 text-gray-500 dark:text-gray-300">
+                                            {% comment %} <li class="list-inline-item">
+                                                <i class="mdi mdi-message"></i> {{ candidate.message }}
+                                            </li> 
+                                             <li class="list-inline-item">
+                                                <i class="uil uil-wallet"></i>
+                                            </li> {% endcomment %}
+                                        </ul>
+                                    </div>
+                                </div><!--end col-->
+
+                                <div class="col-span-12 md:col-span-4">
+                                    <div class="flex flex-wrap gap-2 mt-2 mt-lg-0">
+                                        <span class="px-2 py-1 text-sm font-medium rounded bg-violet-500/20 text-violet-500"> <i class="mdi mdi-message"></i> {{ candidate.message }} </span> 
+                                    </div>
+                                </div> <!--end col-->
+
+                            </div><!--end row-->
+                            <div class="col-span-12 lg:col-span-5">
+                                <div class="text-start lg:text-end dark:text-gray-50">
+                                    <a href="{% url "approve" candidate.user_details.user_id project_id %}" type="button" class="bg-green-500/20 text-[11.5px] px-2 py-0.5 btn bg-green-500/20 hover:bg-green-500 hover:text-white hover:ring hover:ring-green-500/30">Accept</a>
+                                    <a href="{% url "reject" candidate.user_details.user_id project_id %}" type="button" class="bg-red-500/20 text-[11.5px] px-2 py-0.5 btn bg-red-500/20 hover:bg-red-500 hover:text-white hover:ring hover:ring-red-500/30">Reject</a>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        {% endfor %}
+                       
+                    
+                    </div>
+                    <div class="grid grid-cols-12">
+                        <div class="col-span-12">
+                            <ul class="flex justify-center gap-2 mt-8">
+                                <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-gray-100/20">
+                                    <a class="cursor-auto" href="javascript:void(0)" tabindex="-1">
+                                        <i class="mdi mdi-chevron-double-left text-16 leading-[2.8] dark:text-white"></i>
+                                    </a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-white border border-transparent rounded-full cursor-pointer group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">1</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">2</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">3</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a class="text-16 leading-[2.8]" href="javascript:void(0)">4</a>
+                                </li>
+                                <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                    <a href="javascript:void(0)" tabindex="-1">
+                                        <i class="mdi mdi-chevron-double-right text-16 leading-[2.8]"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--end col-->
+                    </div>
+                </div>
+            </section>
+        <!-- End grid -->
+        
+
+    </div>
+</div>
+
+{% endblock content %}

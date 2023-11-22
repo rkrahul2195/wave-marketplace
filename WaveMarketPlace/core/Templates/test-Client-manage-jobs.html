@@ -1,0 +1,139 @@
+{% extends "home.html" %}
+
+{% load static %}
+
+{% block page_first_part %}
+
+<section class="pt-28 lg:pt-44 pb-28 group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500 dark:bg-neutral-900 bg-[url('../images/home/page-title.png')] bg-center bg-cover relative" >
+    <div class="container mx-auto">
+        <div class="grid">
+            <div class="col-span-12">
+                <div class="text-center text-white">
+                    <h3 class="mb-4 text-[26px]">Bookmark Jobs</h3>
+                    <div class="page-next">
+                        <nav class="inline-block" aria-label="breadcrumb text-center">
+                            <ol class="flex flex-wrap justify-center text-sm font-medium uppercase">
+                                <li><a href="#">Home</a></li>
+                                <li><i class="bx bxs-chevron-right align-middle px-2.5"></i><a href="javascript:void(0)">Profile</a></li>
+                                <li class="active" aria-current="page"><i class="bx bxs-chevron-right align-middle px-2.5"></i>bookmark jobs</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <img src="{% static "assets/images/about/shape.png" %}" alt="" class="absolute block bg-cover -bottom-0 dark:hidden">
+    <img src="{% static "assets/images/about/shape-dark.png" %}" alt="" class="absolute hidden bg-cover -bottom-0 dark:block">
+</section>
+
+{% endblock page_first_part %} 
+
+{% block content %}
+<div class="main-content">
+    <div class="page-content">
+        <section class="py-20">
+            <div class="container mx-auto">
+                <div class="grid items-center grid-cols-12 mb-4">
+                    <div class="col-span-12 lg:col-span-8">
+                        <div class="mb-3 mb-lg-0">
+                            <h6 class="text-gray-900 text-16 dark:text-gray-50"> Showing Your Job results </h6>
+                        </div>
+                    </div><!--end col-->
+                </div>
+                
+                <div class="mt-8">
+                    <div class="grid grid-cols-1 gap-y-5">
+                        {% for bookdata in  data %}
+                        <div class="p-5 border border-gray-100/50 rounded-md relative hover:-translate-y-1.5 transition-all duration-500 ease-in-out group-data-[theme-color=violet]:hover:border-violet-500 group-data-[theme-color=sky]:hover:border-sky-500 group-data-[theme-color=red]:hover:border-red-500 group-data-[theme-color=green]:hover:border-green-500 group-data-[theme-color=pink]:hover:border-pink-500 group-data-[theme-color=blue]:hover:border-blue-500 hover:shadow-md hover:shadow-gray-100/30 dark:border-neutral-600 dark:hover:shadow-neutral-900">
+                           
+                            <div class="grid grid-cols-12">
+                                <div class="col-span-12 lg:col-span-1">
+                                    <a href="#company-details.html"><img src="{{ bookdata.image.url }}" alt="" class="w-16 h-16 img-fluid rounded-3"></a>
+                                </div><!--end col-->
+                                <div class="col-span-12 lg:col-span-9">
+                                    <div class="mt-4 lg:mt-0">
+                                        <h5 class="mb-1 text-17"><a href="#job-details.html" class="text-gray-900 dark:text-gray-50">{{bookdata.title}} </a></h5>
+                                        <ul class="flex gap-3 mb-0">
+                                            <li class="">
+                                                <p class="mb-0 text-sm text-gray-500 dark:text-gray-300"><i class="uil uil-user icon"></i>  {{ bookdata.client_id.first_name}} {{ bookdata.client_id.last_name}} </p>
+                                            </li>
+                                            <li class="">
+                                                <p class="mb-0 text-sm text-gray-500 dark:text-gray-300"><i class="uil uil-wallet"></i> {{bookdata.budget}} </p>
+                                            </li>
+                                            <li class="">
+                                                <p class="mb-0 text-sm text-gray-500 dark:text-gray-300"><i class="mdi mdi-calendar"></i> {{bookdata.deadline}} </p>
+                                            </li>
+                                        </ul>
+                                        <div class="flex flex-wrap gap-2 mt-3">
+                                            <span class="bg-green-500/20 text-green-500 text-11 px-2 py-0.5 font-medium rounded">{{ bookdata.catagories }} </span>
+                                         </div>
+                                    </div>
+                                </div><!--end col-->
+                                <div class="items-center col-span-12 lg:col-span-2 ">
+                                    <ul class="flex flex-wrap gap-3 mt-4 lg:mt-0">
+                                        <li class="w-10 h-10 text-lg leading-10 text-center text-green-500 rounded-full bg-green-500/20" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Edit" data-bs-original-title="Edit">
+                                            <a href="#manage-jobs-post.html" class="text-center avatar-sm success-bg-subtle d-inline-block rounded-circle fs-18">
+                                                <i class="uil uil-edit"></i>
+                                            </a>
+                                        </li> 
+                                        <li class="w-10 h-10 text-lg leading-10 text-center text-red-500 rounded-full bg-red-500/20" data-bs-toggle="tooltip" data-bs-placement="top" aria-label="Delete" data-bs-original-title="Delete">
+                                            <a href="#" data-bs-toggle="modal" data-bs-target="#deleteModal" class="text-center avatar-sm danger-bg-subtle d-inline-block rounded-circle fs-18">
+                                                <i class="uil uil-trash-alt"></i>
+                                            </a>
+                                        </li>
+                                    </ul> 
+
+                                    <div class="col-span-12 lg:col-span-5">
+                                        <div class="text-start lg:text-end dark:text-gray-50">
+                                            <a href="{% url "paybills" bookdata.id %}" type="button" class="text-green-500 border-transparent btn bg-green-500/20 hover:bg-green-500 hover:text-white hover:ring hover:ring-green-500/30"><i class="mdi mdi-account-credit-card text-4 leading-[1.5]"></i></a>
+                                        </div>
+                                    </div>
+                                </div>  <!--end col-->
+                                
+                            </div> <!--end row-->
+                            
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-12">
+                    <div class="col-span-12">
+                        <ul class="flex justify-center gap-2 mt-8">
+                            <li class="w-12 h-12 text-center border rounded-full cursor-default border-gray-100/50 dark:border-gray-100/20">
+                                <a class="cursor-auto" href="javascript:void(0)" tabindex="-1">
+                                    <i class="mdi mdi-chevron-double-left text-16 leading-[2.8] dark:text-white"></i>
+                                </a>
+                            </li>
+                            <li class="w-12 h-12 text-center text-white border border-transparent rounded-full cursor-pointer group-data-[theme-color=violet]:bg-violet-500 group-data-[theme-color=sky]:bg-sky-500 group-data-[theme-color=red]:bg-red-500 group-data-[theme-color=green]:bg-green-500 group-data-[theme-color=pink]:bg-pink-500 group-data-[theme-color=blue]:bg-blue-500">
+                                <a class="text-16 leading-[2.8]" href="javascript:void(0)">1</a>
+                            </li>
+                            <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                <a class="text-16 leading-[2.8]" href="javascript:void(0)">2</a>
+                            </li>
+                            <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                <a class="text-16 leading-[2.8]" href="javascript:void(0)">3</a>
+                            </li>
+                            <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                <a class="text-16 leading-[2.8]" href="javascript:void(0)">4</a>
+                            </li>
+                            <li class="w-12 h-12 text-center text-gray-900 transition-all duration-300 border rounded-full cursor-pointer border-gray-100/50 hover:bg-gray-100/30 focus:bg-gray-100/30 dark:border-gray-100/20 dark:text-gray-50 dark:hover:bg-gray-500/20">
+                                <a href="javascript:void(0)" tabindex="-1">
+                                    <i class="mdi mdi-chevron-double-right text-16 leading-[2.8]"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--end col-->
+                </div>
+            </div>
+        </section>
+    <!-- End grid -->
+
+
+    </div>
+</div>
+
+ 
+{% endblock content %}

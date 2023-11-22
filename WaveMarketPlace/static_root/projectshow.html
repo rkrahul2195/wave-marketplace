@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Document</title>
+</head>
+<body>
+  <section>
+    <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white text-center"> Project List </h1>
+</section>
+     
+<br>
+<br>
+    <div style="width: 60%; margin: auto;">
+
+        <table  class="caption-top">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Catagory</th>
+                <th>Deadline</th>
+                <th>Budget</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for item in details  %}
+              <tr>
+                <td>{{item.title}}</td>
+                <td width=40%> {{item.description}}</td>
+                <td> {{item.catagories}} </td>
+                <td> {{item.deadline}} </td>
+                <td> {{item.budget}} </td>
+                <td> <a href="{% url 'list' item.id %}" type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Apply </a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+    </div>
+</body>
+</html>

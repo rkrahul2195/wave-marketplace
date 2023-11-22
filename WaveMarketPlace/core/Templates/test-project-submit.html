@@ -1,0 +1,71 @@
+{% extends "home.html" %}
+{% load static %}
+
+{% block page_first_part %}
+{% endblock page_first_part %}
+
+{% block content %}
+
+<div class="main-content">
+    <div class="page-content"> 
+        <section class="flex items-center justify-center min-h-screen py-10 group-data-[theme-color=violet]:bg-violet-500/10 group-data-[theme-color=sky]:bg-sky-500/10 group-data-[theme-color=red]:bg-red-500/10 group-data-[theme-color=green]:bg-green-500/10 group-data-[theme-color=pink]:bg-pink-500/10 group-data-[theme-color=blue]:bg-blue-500/10 dark:bg-neutral-700">
+            <div class="container mx-auto">
+                <div class="grid grid-cols-12">
+                    <div class="col-span-12 lg:col-span-10 lg:col-start-2">
+                        <div class="flex flex-col bg-white rounded-lg dark:bg-neutral-800">
+                            <div class="grid flex-col grid-cols-12 ">
+                                <div class="col-span-12 lg:col-span-6 ltr:rounded-l-lg rtl:rounded-r-lg">
+                                    <div class="p-10">
+                                        <a href="{% static "index.html" %}">
+                                            <img src="{% static "assets/images/logo-light.png" %}" alt="" class="hidden mx-auto dark:block">
+                                            <img src="{% static "assets/images/logo-dark.png" %}" alt="" class="block mx-auto dark:hidden">
+                                        </a>
+                                        <div class="mt-5">
+                                            <img src="{% static "assets/images/auth/chat-box.jpeg" %}" alt="">
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="col-span-12 rounded-b-md lg:col-span-6 group-data-[theme-color=violet]:bg-violet-700 group-data-[theme-color=sky]:bg-sky-700 group-data-[theme-color=red]:bg-red-700 group-data-[theme-color=green]:bg-green-700 group-data-[theme-color=pink]:bg-pink-700 group-data-[theme-color=blue]:bg-blue-700 lg:rounded-b-none lg:ltr:rounded-r-lg rtl:rounded-l-lg">
+                                    <div class="flex flex-col justify-center h-full p-12">
+                                        <div class="text-center">
+                                            <h5 class="text-[18.5px] text-white"> Submission Your Project! </h5>
+                                            <div class="text-center">
+                                            </div>
+                                        </div>
+                                        <form method='post' class="mt-8" enctype="multipart/form-data" action="{% url "submission-file" %}">
+                                            {% csrf_token %}
+                                            <input name='id' type="hidden" value="{{ data.id }}">
+                                            <div class="mb-5">
+                                                <label for="usernameInput" class="text-white"> File Name </label>
+                                                <input name='filename' type="text" value="{{ data.title }}" class="w-full mt-1 group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white" required="" id="usernameInput" placeholder=" ">
+                                                <label for="usernameInput" class="text-white">Describtion </label>
+                                            <textarea  name='describtion' 
+                                                class="w-full mt-1 text-sm  group-data-[theme-color=violet]:bg-violet-400/40 group-data-[theme-color=sky]:bg-sky-400/40 group-data-[theme-color=red]:bg-red-400/40 group-data-[theme-color=green]:bg-green-400/40 group-data-[theme-color=pink]:bg-pink-400/40 group-data-[theme-color=blue]:bg-blue-400/40 py-2.5 rounded border-transparent placeholder:text-sm placeholder:text-gray-50 text-white rounded border-gray-100/50" 
+                                                required=""
+                                                id="usernameInput">  
+                                            </textarea>
+                                                <label for="usernameInput" class="text-white"> File </label>
+                                                <input name='file' type="file"  class="relative m-0 block w-full min-w-0 flex-auto cursor-pointer rounded border border-gray-100/50 bg-clip-padding pr-3 py-[0.32rem] font-normal leading-[2.15] text-neutral-700 transition duration-300 ease-in-out file:mr-2 file:-my-[0.32rem] file:cursor-pointer file:overflow-hidden file:rounded-none file:border-0 file:border-solid file:border-inherit file:bg-gray-100/30 file:px-3 file:py-[0.32rem] file:text-neutral-700 file:transition file:duration-150 file:ease-in-out file:[border-inline-end-width:1px] file:[margin-inline-end:0.75rem] hover:file:bg-neutral-200 focus:border-primary focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:file:bg-neutral-700 dark:file:text-neutral-100 dark:focus:border-primary" required="" id="usernameInput" placeholder=" ">
+                                            </div>
+            
+                                            <div class="my-8 text-center">
+                                            <button type="Submit" class="btn w-full bg-white text-gray-900 font-medium border-transparent hover:-translate-y-1.5 duration-500 ease">Submit 
+                                            </button>
+                                            </div>
+                                        </form>
+                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+</div>
+
+
+
+{% endblock content %}

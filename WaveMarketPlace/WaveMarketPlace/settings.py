@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "core",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -39,7 +41,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "crispy_forms",
     "crispy_tailwind",
-    "core",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
@@ -54,6 +55,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'django.contrib.messages.middleware.MessageMiddleware',
+     
 ]
 
 ROOT_URLCONF = "WaveMarketPlace.urls"
@@ -69,6 +72,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -122,10 +126,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+# STATIC_URL = "static/" 
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
+
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
@@ -136,3 +141,14 @@ EMAIL_HOST_USER = 'rkrahul.diu.672@gmail.com'
 EMAIL_HOST_PASSWORD = 'hofxiacjbzhiiurx'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+STATIC_URL = "/core/Templates/" 
+STATICFILES_DIRS = [
+    # Add paths to your static files here
+    os.path.join(BASE_DIR, 'core/Templates/'),
+]
+STATIC_ROOT = os.path.join(BASE_DIR,'static_root')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'core/Templates/assets/media/'
